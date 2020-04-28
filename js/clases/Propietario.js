@@ -1,5 +1,4 @@
-
-class Propietario{
+export default class Propietario{
     constructor(nombre, cedula, fecha_nacimiento, genero){
         this.nombre = nombre;
         this.documento = cedula;
@@ -16,6 +15,8 @@ class Propietario{
     }
     
 }
+
+//export default Propietario
 
 /*
 let objeto1 = new Propietario(3);
