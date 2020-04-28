@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="title" content="Conjunto Residencial - Mensualidad">
+    <link rel="shortcut icon" href="imagenes/iconos/favicon.ico" type="image/x-icon">
+    <meta name="description" content="Aplicativo encargado de calcular la mensualidad a pagar por parte de los propietarios">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="sass/style.css">
+    <title>Conjunto Residencial - Mensualidad</title>
+  </head>
+  <body>
+    <section id="page-grid" class="container-fluid">
+        <header id="header">
+            <div class="row align-items-center">
+                <div class="col-lg-2 col-md-2 col-12 text-center">
+                    <img class="img-fluid" src="imagenes/logo.png" class="img-fluid" id="logo"/>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <nav class="borde navbar navbar-expand-lg navbar-dark bg-info" id="menu">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                          </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="index.html">Inicio</a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#">Mensualidad</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="contactanos.html">Contactanos</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+                <div class="col-lg-4 col-md-4 col-12">
+                    <form class="form-inline">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Buscar contenido" aria-label="Search">
+                        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Buscar</button>
+                    </form>
+                </div>
+            </div>
+            <div class="row" id="ctn_banner">
+                <div class="col-lg-12">
+                    <img class="img-fluid card-img" src="imagenes/banner_img_1.jpg">
+                    <div class="card-title">Mensualidad</div>
+                    <div class="card-title_1">Conjunto Residencial</div>
+                </div>
+            </div>
+        </header>
+
+        <section id="main">
+            <div class="card text-center">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                        <a class="nav-link active" id="crear-mensualidad-tab" data-toggle="tab" href="#crear-mensualidad" role="tab" aria-controls="home" aria-selected="true">Crear Mensualidad</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" id="ver-estadisticas-tab" data-toggle="tab" href="#ver-estadisticas" role="tab" aria-controls="ver-estadisticas" aria-selected="false">Ver Estadísticas</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content" id="mis-tabs">
+                        <div class="tab-pane fade show active" id="crear-mensualidad" role="tabpanel" aria-labelledby="crear-mensualidad-tab">
+                            <article class="row">
+                                <div class="col-lg-11">
+                                    <form class="form">
+                                        <input class="form-control" type="search" placeholder="Filtrar" aria-label="Search">
+                                    </form>
+                                </div>
+                                <div class="col-lg-1">
+                                    <button class="btn btn-success" id="btn-agregar-mensualidad"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </article>
+                            <article class="row">
+                                <article class="col-lg-12">
+                                    <table id="tbl-mensualidades" class="table table-bordered">
+                                        <thead>
+                                            <th>Nombre</th>
+                                            <th>Edad</th>
+                                            <th>Genero</th>
+                                            <th>Fecha de mensualidad</th>
+                                            <th>Total a pagar</th>
+                                            <th>Acciones</th>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+
+
+                                    <article id="modalNuevaMensualidad" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Nueva Mensualidad</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form id="frm_nueva_mensualidad">
+                                                        <article class="card text-white bg-info mb-3 text-left">
+                                                            <div class="card-header">Datos de propietario</div>
+                                                            <div class="card-body">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-6 col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="nombre_propietario">Nombre(*)</label>
+                                                                                <input type="text" class="form-control" id="nombre_propietario" required placeholder="Nombre propietario">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="documento_propietario">Documento(*)</label>
+                                                                                <input type="text" class="form-control" id="documento_propietario" maxlength="11" required placeholder="Documento propietario">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-6 col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="genero_propietario">Genero(*)</label>
+                                                                                <select class="form-control" id="genero_propietario" required>
+                                                                                    <option style="display: none;"></option>
+                                                                                    <option value="Hombre">Hombre</option>
+                                                                                    <option value="Mujer">Mujer</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="fecha_nac_propietario">Fecha de nacimiento(*)</label>
+                                                                                <input type="date" class="form-control" id="fecha_nac_propietario" required placeholder="Y-m-d">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                            
+                                                            </div>
+                                                        </article>
+
+                                                        <article class="card text-white bg-info mb-3 text-left">
+                                                            <div class="card-header">Datos del inmueble en la mensualidad</div>
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="met_cuadrados_inmueble_men">Metros cuadrados m<sup>2</sup>(*)</label>
+                                                                            <input type="number" class="form-control" id="met_cuadrados_inmueble_men" required placeholder="Metros cuadrados">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-md-6">
+                                                                        <label for="tipo_inmueble_men">Tipo(*)</label><br/>
+                                                                        <div class="form-check form-check-inline">
+                                                                            <input class="form-check-input" type="radio" name="tipo_inmueble_men" id="Apartamento" value="Apartamento" required>
+                                                                            <label class="form-check-label" for="Apartamento">Apartamento</label>
+                                                                        </div>
+                                                                        <div class="form-check form-check-inline">
+                                                                            <input class="form-check-input" type="radio" name="tipo_inmueble_men" id="Casa" value="Casa">
+                                                                            <label class="form-check-label" for="Casa">Casa</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="num_habitantes_inmueble_men">Número de habitantes (*)</label>
+                                                                            <input type="number" class="form-control" id="num_habitantes_inmueble_men" required placeholder="Número de habitantes en inmueble">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="fecha_inmueble_men">Fecha de mensualidad (*)</label>
+                                                                            <input type="month" class="form-control" id="fecha_inmueble_men" required placeholder="Y-m">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </article>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+                                                    <button type="button" class="btn btn-primary" id="btn_guardar_nueva_mensualidad">Guardar</button>
+                                                  </div>
+                                            </div>
+                                        </div>
+                                    </article>
+
+
+                                </article>
+                            </article>
+                        </div>
+                        <div class="tab-pane fade" id="ver-estadisticas" role="tabpanel" aria-labelledby="ver-estadisticas-tab">...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer id="footer">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <p>Copyrigth © 2020 | Medellín - <a href="https://www.antioquia.gov.co/" target="_top">Antioquia</a>, Colombia | <a target="_blank" href="https://github.com"><i class="fa fa-github"></i> | <a target="_blank" href="https://facebook.com"><i class="fa fa-facebook-square"></i></a> | <a target="_blank" href="https://twitter.com"><i class="fa fa-twitter"></i></a> </p>
+                </div>
+            </div>
+        </footer>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="module" src="js/script.js"></script>
+  </body>
+</html>
+
