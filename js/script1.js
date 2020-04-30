@@ -1,22 +1,17 @@
-import propiedades from './script2.js';
-import Propietario from './clases/Propietario.js'
+import Propietario from './clases/Propietario.js';
 
-//console.log(numero);
-//console.log(propiedades.numero);
-//console.log(propiedades.suma(800));
-//console.log(propiedades.suma1());
-//let x = new clase("Pedro", 2, "1980-01-12",  "masculino");
-//console.log(x);
-
-    	
-document.getElementById("btn-agregar-mensualidad").addEventListener('click', () => {
-	document.getElementById("frm_nueva_mensualidad").reset();
-    $("#modalNuevaMensualidad").modal('show');
+document.getElementById("btn-agregar-mensualidad").addEventListener("click", (e) => {
+    $("#modalNuevaMensualidad").modal("toggle");
 });
 
-document.getElementById("btn_guardar_nueva_mensualidad").addEventListener('click',  () =>{
+document.querySelector("#btn_guardar_nueva_mensualidad").addEventListener("click", (e) => {
     if(document.getElementById("frm_nueva_mensualidad").reportValidity()){
-        $("#modalNuevaMensualidad").modal('hide');
-        alert("Registro almacenado");
-    }
+        let p = new Propietario();
+        p.nombre = document.querySelector("#nombre_propietario").value;
+        p.documento = document.querySelector("#documento_propietario").value;
+        p.fecha_nacimiento = document.querySelector("#fecha_nac_propietario").value;
+        p.genero = document.querySelector("#genero_propietario").value;
+    }else{
+        console.log("Error validando el formulario!!!");
+    } 
 });
