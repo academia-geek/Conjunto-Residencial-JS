@@ -1,5 +1,9 @@
 import Propietario from './clases/Propietario.js';
+import MensualidadInmueble from './clases/MensualidadInmueble.js';
+
 const ArregloPropietario = [];
+const ArregloMensualidaInmueble = [];
+
 var indicePropietario;
 var buscarPropietarioPorCedula = (elemento) => {
 	indicePropietario = indicePropietario + 1;
@@ -13,6 +17,9 @@ document.getElementById("btn-agregar-mensualidad").addEventListener("click", (e)
 document.querySelector("#btn_guardar_nueva_mensualidad").addEventListener("click", (e) => {
     if(document.getElementById("frm_nueva_mensualidad").reportValidity()){
         indicePropietario = -1;
+        /**
+         * Captura de datos para un propietario
+         */
         let r = ArregloPropietario.find(buscarPropietarioPorCedula);
         let p = new Propietario();
         p.nombre = document.querySelector("#nombre_propietario").value;
@@ -20,11 +27,23 @@ document.querySelector("#btn_guardar_nueva_mensualidad").addEventListener("click
         p.fecha_nacimiento = document.querySelector("#fecha_nac_propietario").value;
         p.genero = document.querySelector("#genero_propietario").value;
         
-        //let N = ArregloPropietario.push(p);
+        /**
+         * Captura de datos para la mensualidad del inmueble
+         */
+        let m = new MensualidadInmueble();
+        m.area = document.querySelector("#met_cuadrados_inmueble_men").value;
+        m.numHabitates = document.querySelector("#num_habitantes_inmueble_men").value; 
+        m.fechaMensualidad = document.querySelector("#fecha_inmueble_men").value; 
+        m.documentoPro = p.documento;
         
-       // console.log(p.calcularEdad());
-        //console.log(p);
-        //console.log(N);
+        if(document.querySelector("#Apartamento").checked){
+            m.tipo = document.querySelector("#Apartamento").value;
+        }else if(document.querySelector("#Casa").checked){
+            m.tipo = document.querySelector("#Casa").value;
+        }
+        
+            
+        
         if(r ==  undefined){
             ArregloPropietario.push(p);
         }else{
