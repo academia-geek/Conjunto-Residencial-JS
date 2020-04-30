@@ -17,11 +17,10 @@ export default class Propietario{
 }
 
 //export default Propietario
-
 /*
-let objeto1 = new Propietario(3);
-objeto1.setNombre("Juan");
-objeto1.documento = 3342434;
+
+let objeto1 = new Propietario("Carlos", 3213322);
+
 let objeto2 = new Propietario("Pedro");
 let objeto3 = new Propietario("Oscar");
 

@@ -8,6 +8,15 @@ import Propietario from './clases/Propietario.js'
 //let x = new clase("Pedro", 2, "1980-01-12",  "masculino");
 //console.log(x);
 
-document.getElementById('btn-agregar-mensualidad').addEventListener('click', function(e){
+    	
+document.getElementById("btn-agregar-mensualidad").addEventListener('click', () => {
+	document.getElementById("frm_nueva_mensualidad").reset();
     $("#modalNuevaMensualidad").modal('show');
+});
+
+document.getElementById("btn_guardar_nueva_mensualidad").addEventListener('click',  () =>{
+    if(document.getElementById("frm_nueva_mensualidad").reportValidity()){
+        $("#modalNuevaMensualidad").modal('hide');
+        alert("Registro almacenado");
+    }
 });
