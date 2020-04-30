@@ -42,8 +42,14 @@ document.querySelector("#btn_guardar_nueva_mensualidad").addEventListener("click
             m.tipo = document.querySelector("#Casa").value;
         }
         
-            
+        /**
+         * Adicion de los datos de una mensualidad para un inmueble
+         */
+        ArregloMensualidaInmueble.push(m);
         
+        /**
+         * Adicion o modificacion de los datos del propietario
+         */
         if(r ==  undefined){
             ArregloPropietario.push(p);
         }else{
