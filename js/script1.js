@@ -11,6 +11,7 @@ var buscarPropietarioPorCedula = (elemento) => {
 }
 
 document.getElementById("btn-agregar-mensualidad").addEventListener("click", (e) => {
+	document.getElementById("frm_nueva_mensualidad").reset();
     $("#modalNuevaMensualidad").modal("toggle");
 });
 
@@ -50,11 +51,14 @@ document.querySelector("#btn_guardar_nueva_mensualidad").addEventListener("click
         /**
          * Adicion o modificacion de los datos del propietario
          */
-        if(r ==  undefined){
+        if(r == undefined){ //No existe el propietario
             ArregloPropietario.push(p);
         }else{
             ArregloPropietario[indicePropietario] = p;
         }
+        
+        $("#modalNuevaMensualidad").modal("toggle");
+        alert("Los datos fueron almacenados");
     }else{
         //ArregloPropietario.pop();
         console.log("Error validando el formulario!!!");
