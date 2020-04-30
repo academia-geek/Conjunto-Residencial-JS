@@ -1,7 +1,8 @@
 import Propietario from './clases/Propietario.js';
 const ArregloPropietario = [];
-
+var indicePropietario;
 var buscarPropietarioPorCedula = (elemento) => {
+	indicePropietario = indicePropietario + 1;
     return document.querySelector("#documento_propietario").value == elemento.documento;
 }
 
@@ -11,6 +12,7 @@ document.getElementById("btn-agregar-mensualidad").addEventListener("click", (e)
 
 document.querySelector("#btn_guardar_nueva_mensualidad").addEventListener("click", (e) => {
     if(document.getElementById("frm_nueva_mensualidad").reportValidity()){
+        indicePropietario = -1;
         let r = ArregloPropietario.find(buscarPropietarioPorCedula);
         let p = new Propietario();
         p.nombre = document.querySelector("#nombre_propietario").value;
@@ -25,9 +27,9 @@ document.querySelector("#btn_guardar_nueva_mensualidad").addEventListener("click
         //console.log(N);
         if(r ==  undefined){
             ArregloPropietario.push(p);
+        }else{
+            ArregloPropietario[indicePropietario] = p;
         }
-       
-        console.log(r);
     }else{
         //ArregloPropietario.pop();
         console.log("Error validando el formulario!!!");
