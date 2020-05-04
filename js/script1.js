@@ -16,18 +16,18 @@ let convertirArregloPropietario = (arreglo) => {
 let convertirArregloMensuInm = (arreglo) => {
     let arregloMen = arreglo.map((elemento) => {
        let men = new MensualidadInmueble();
-       let prop = new Propietario();
+       men.propietario = new Propietario();
        men.area = elemento.area;
        men.fechaMensualidad = elemento.fechaMensualidad;
        men.numHabitates = elemento.numHabitates;
        men.tipo = elemento.tipo;
        
-       prop.documento =  elemento.propietario.documento;
-       prop.fecha_nacimiento = elemento.propietario.fecha_nacimiento;
-       prop.genero = elemento.propietario.genero;
-       prop.nombre = elemento.propietario.nombre;
+       men.propietario.documento =  elemento.propietario.documento;
+       men.propietario.fecha_nacimiento = elemento.propietario.fecha_nacimiento;
+       men.propietario.genero = elemento.propietario.genero;
+       men.propietario.nombre = elemento.propietario.nombre;
        
-       men.propietario = prop;
+      // men.propietario = prop;
        
        men.calcularValorAdministracion();
        men.calcularValorCuotaAseo();
@@ -103,7 +103,7 @@ document.querySelector("#btn_guardar_nueva_mensualidad").addEventListener("click
         localStorage.setItem('propietarios', JSON.stringify(ArregloPropietario));
         localStorage.setItem('mensualidad_inmueble', JSON.stringify(ArregloMensualidaInmueble));
         
-        recargarGridMensualidadInmueble();
+        recargarGridMensualidadInmueble(ArregloMensualidaInmueble);
         
         $("#modalNuevaMensualidad").modal("toggle");
         alert("Los datos fueron almacenados");
@@ -113,9 +113,20 @@ document.querySelector("#btn_guardar_nueva_mensualidad").addEventListener("click
     } 
 });
 
-let recargarGridMensualidadInmueble = () => {
+document.querySelector("#btn-buscar-mensualidad").addEventListener("click", (e) => {
+	let filtro = document.querySelector("#txt_buscador").value.toLocaleLowerCase();
+    let arregloBusqueda = ArregloMensualidaInmueble.filter((item, indice) => {
+        return (item.propietario.nombre.toLocaleLowerCase().indexOf(filtro) >= 0 
+                || item.valorTotal.toString().toLocaleLowerCase().indexOf(filtro) >= 0 
+                || item.fechaMensualidad.toLocaleLowerCase().indexOf(filtro) >= 0);
+                
+    });
+    recargarGridMensualidadInmueble(arregloBusqueda);
+});
+
+let recargarGridMensualidadInmueble = (arreglo) => {
     let HTML = '';
-    ArregloMensualidaInmueble.forEach((item, indice) => {
+    arreglo.forEach((item, indice) => {
         HTML +=  `<tr>
                   <td>${item.propietario.nombre}</td>
                   <td>${item.propietario.calcularEdad()} años</td>
@@ -131,5 +142,5 @@ let recargarGridMensualidadInmueble = () => {
     
 }
 
-$(recargarGridMensualidadInmueble)
+$(recargarGridMensualidadInmueble(ArregloMensualidaInmueble))
 
