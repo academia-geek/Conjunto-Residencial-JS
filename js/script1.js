@@ -1,13 +1,17 @@
 import Propietario from './clases/Propietario.js';
 import MensualidadInmueble from './clases/MensualidadInmueble.js';
 
-const ArregloPropietario = (localStorage.getItem('propietarios') == null)?([]):(JSON.parse(localStorage.getItem('propietarios')));
-const ArregloMensualidaInmueble = [];
+const ArregloPropietario = (localStorage.getItem('propietarios') == null)?([]):(convertArregloPropietario(JSON.parse(localStorage.getItem('propietarios'))));
+const ArregloMensualidaInmueble = (localStorage.getItem('mensualidad_inmueble') == null)?([]):(JSON.parse(localStorage.getItem('mensualidad_inmueble')));;
 
 var indicePropietario;
 var buscarPropietarioPorCedula = (elemento, indice) => {
 	indicePropietario = indice;
     return document.querySelector("#documento_propietario").value == elemento.documento;
+}
+
+let convertArregloPropietario = (arreglo) => {
+    console.log(arreglo);
 }
 
 document.getElementById("btn-agregar-mensualidad").addEventListener("click", (e) => {
@@ -58,6 +62,10 @@ document.querySelector("#btn_guardar_nueva_mensualidad").addEventListener("click
         
         localStorage.setItem('propietarios', JSON.stringify(ArregloPropietario));
         localStorage.setItem('mensualidad_inmueble', JSON.stringify(ArregloMensualidaInmueble));
+        
+        console.log("=======");
+        console.log(ArregloPropietario);
+        console.log("=======");
         
         $("#modalNuevaMensualidad").modal("toggle");
         alert("Los datos fueron almacenados");
