@@ -75,6 +75,10 @@ document.querySelector("#btn_guardar_nueva_mensualidad").addEventListener("click
             m.tipo = document.querySelector("#Casa").value;
         }
         
+        m.calcularValorAdministracion();
+        m.calcularValorCuotaAseo();
+        m.calcularValorDerechosGym();
+        
         /**
          * Adicion de los datos de una mensualidad para un inmueble
          */
