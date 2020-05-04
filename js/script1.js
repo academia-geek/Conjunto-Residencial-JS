@@ -78,6 +78,7 @@ document.querySelector("#btn_guardar_nueva_mensualidad").addEventListener("click
         m.calcularValorAdministracion();
         m.calcularValorCuotaAseo();
         m.calcularValorDerechosGym();
+        m.calcularValorTotal();
         
         /**
          * Adicion de los datos de una mensualidad para un inmueble
