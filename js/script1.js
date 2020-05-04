@@ -1,7 +1,7 @@
 import Propietario from './clases/Propietario.js';
 import MensualidadInmueble from './clases/MensualidadInmueble.js';
 
-let convertArregloPropietario = (arreglo) => {
+let convertirArregloPropietario = (arreglo) => {
     let arregloPro = arreglo.map((elemento) => {
        let prop = new Propietario();
        prop.documento = elemento.documento;
@@ -13,8 +13,28 @@ let convertArregloPropietario = (arreglo) => {
     return arregloPro;
 }
 
-const ArregloPropietario = (localStorage.getItem('propietarios') == null)?([]):(convertArregloPropietario(JSON.parse(localStorage.getItem('propietarios'))));
-const ArregloMensualidaInmueble = (localStorage.getItem('mensualidad_inmueble') == null)?([]):(JSON.parse(localStorage.getItem('mensualidad_inmueble')));;
+let convertirArregloMensuInm = (arreglo) => {
+    let arregloMen = arreglo.map((elemento) => {
+       let men = new MensualidadInmueble();
+       let prop = new Propietario();
+       men.area = elemento.area;
+       men.fechaMensualidad = elemento.fechaMensualidad;
+       men.numHabitates = elemento.numHabitates;
+       men.tipo = elemento.tipo;
+       
+       prop.documento =  elemento.propietario.documento;
+       prop.fecha_nacimiento = elemento.propietario.fecha_nacimiento;
+       prop.genero = elemento.propietario.genero;
+       prop.nombre = elemento.propietario.nombre;
+       
+       men.propietario = prop;
+       return men;
+    });
+    return arregloMen;
+}
+
+const ArregloPropietario = (localStorage.getItem('propietarios') == null)?([]):(convertirArregloPropietario(JSON.parse(localStorage.getItem('propietarios'))));
+const ArregloMensualidaInmueble = (localStorage.getItem('mensualidad_inmueble') == null)?([]):(convertirArregloMensuInm(JSON.parse(localStorage.getItem('mensualidad_inmueble'))));;
 
 var indicePropietario;
 var buscarPropietarioPorCedula = (elemento, indice) => {
