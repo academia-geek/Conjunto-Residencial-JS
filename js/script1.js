@@ -2,10 +2,15 @@ import Propietario from './clases/Propietario.js';
 import MensualidadInmueble from './clases/MensualidadInmueble.js';
 
 let convertArregloPropietario = (arreglo) => {
-    arreglo.forEach(function(elemento,  indice){
-        console.log(elemento);
-        console.log(indice);
+    let arregloPro = arreglo.map((elemento) => {
+       let prop = new Propietario();
+       prop.documento = elemento.documento;
+       prop.fecha_nacimiento = elemento.fecha_nacimiento;
+       prop.genero = elemento.genero;
+       prop.nombre = elemento.nombre;
+       return prop;
     });
+    return arregloPro;
 }
 
 const ArregloPropietario = (localStorage.getItem('propietarios') == null)?([]):(convertArregloPropietario(JSON.parse(localStorage.getItem('propietarios'))));
