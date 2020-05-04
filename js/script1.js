@@ -1,7 +1,7 @@
 import Propietario from './clases/Propietario.js';
 import MensualidadInmueble from './clases/MensualidadInmueble.js';
 
-const ArregloPropietario = [];
+const ArregloPropietario = (localStorage.getItem('propietarios') == null)?([]):(JSON.parse(localStorage.getItem('propietarios')));
 const ArregloMensualidaInmueble = [];
 
 var indicePropietario;
