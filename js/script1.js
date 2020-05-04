@@ -28,6 +28,12 @@ let convertirArregloMensuInm = (arreglo) => {
        prop.nombre = elemento.propietario.nombre;
        
        men.propietario = prop;
+       
+       men.calcularValorAdministracion();
+       men.calcularValorCuotaAseo();
+       men.calcularValorDerechosGym();
+       men.calcularValorTotal();
+       
        return men;
     });
     return arregloMen;
@@ -97,9 +103,7 @@ document.querySelector("#btn_guardar_nueva_mensualidad").addEventListener("click
         localStorage.setItem('propietarios', JSON.stringify(ArregloPropietario));
         localStorage.setItem('mensualidad_inmueble', JSON.stringify(ArregloMensualidaInmueble));
         
-        console.log("=======");
-        console.log(ArregloPropietario);
-        console.log("=======");
+        recargarGridMensualidadInmueble();
         
         $("#modalNuevaMensualidad").modal("toggle");
         alert("Los datos fueron almacenados");
@@ -109,4 +113,23 @@ document.querySelector("#btn_guardar_nueva_mensualidad").addEventListener("click
     } 
 });
 
+let recargarGridMensualidadInmueble = () => {
+    let HTML = '';
+    ArregloMensualidaInmueble.forEach((item, indice) => {
+        HTML +=  `<tr>
+                  <td>${item.propietario.nombre}</td>
+                  <td>${item.propietario.calcularEdad()} años</td>
+                  <td>${item.propietario.genero}</td>
+                  <td>${item.fechaMensualidad}</td>
+                  <td>${item.valorTotal}</td>
+                  <td>
+                    <a href="#" indice="${indice}" class = "btn btn-link">Ver</a>
+                  </td>
+                 </tr>`;
+    });
+    document.querySelector("#tbl-mensualidades tbody").innerHTML = HTML;
+    
+}
+
+$(recargarGridMensualidadInmueble)
 
