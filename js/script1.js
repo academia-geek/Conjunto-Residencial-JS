@@ -1,6 +1,13 @@
 import Propietario from './clases/Propietario.js';
 import MensualidadInmueble from './clases/MensualidadInmueble.js';
 
+let convertArregloPropietario = (arreglo) => {
+    arreglo.forEach(function(elemento,  indice){
+        console.log(elemento);
+        console.log(indice);
+    });
+}
+
 const ArregloPropietario = (localStorage.getItem('propietarios') == null)?([]):(convertArregloPropietario(JSON.parse(localStorage.getItem('propietarios'))));
 const ArregloMensualidaInmueble = (localStorage.getItem('mensualidad_inmueble') == null)?([]):(JSON.parse(localStorage.getItem('mensualidad_inmueble')));;
 
@@ -10,9 +17,6 @@ var buscarPropietarioPorCedula = (elemento, indice) => {
     return document.querySelector("#documento_propietario").value == elemento.documento;
 }
 
-let convertArregloPropietario = (arreglo) => {
-    console.log(arreglo);
-}
 
 document.getElementById("btn-agregar-mensualidad").addEventListener("click", (e) => {
 	document.getElementById("frm_nueva_mensualidad").reset();
