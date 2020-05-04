@@ -5,8 +5,8 @@ const ArregloPropietario = [];
 const ArregloMensualidaInmueble = [];
 
 var indicePropietario;
-var buscarPropietarioPorCedula = (elemento) => {
-	indicePropietario = indicePropietario + 1;
+var buscarPropietarioPorCedula = (elemento, indice) => {
+	indicePropietario = indice;
     return document.querySelector("#documento_propietario").value == elemento.documento;
 }
 
@@ -17,11 +17,10 @@ document.getElementById("btn-agregar-mensualidad").addEventListener("click", (e)
 
 document.querySelector("#btn_guardar_nueva_mensualidad").addEventListener("click", (e) => {
     if(document.getElementById("frm_nueva_mensualidad").reportValidity()){
-        indicePropietario = -1;
         /**
          * Captura de datos para un propietario
          */
-        let r = ArregloPropietario.find(buscarPropietarioPorCedula);
+        let propietarioEncontrado = ArregloPropietario.find(buscarPropietarioPorCedula);
         let p = new Propietario();
         p.nombre = document.querySelector("#nombre_propietario").value;
         p.documento = document.querySelector("#documento_propietario").value;
@@ -35,7 +34,7 @@ document.querySelector("#btn_guardar_nueva_mensualidad").addEventListener("click
         m.area = document.querySelector("#met_cuadrados_inmueble_men").value;
         m.numHabitates = document.querySelector("#num_habitantes_inmueble_men").value; 
         m.fechaMensualidad = document.querySelector("#fecha_inmueble_men").value; 
-        m.documentoPro = p.documento;
+        m.propietario = p;
         
         if(document.querySelector("#Apartamento").checked){
             m.tipo = document.querySelector("#Apartamento").value;
@@ -51,11 +50,14 @@ document.querySelector("#btn_guardar_nueva_mensualidad").addEventListener("click
         /**
          * Adicion o modificacion de los datos del propietario
          */
-        if(r == undefined){ //No existe el propietario
+        if(propietarioEncontrado == undefined){ //No existe el propietario
             ArregloPropietario.push(p);
         }else{
             ArregloPropietario[indicePropietario] = p;
         }
+        
+        localStorage.setItem('propietarios', JSON.stringify(ArregloPropietario));
+        localStorage.setItem('mensualidad_inmueble', JSON.stringify(ArregloMensualidaInmueble));
         
         $("#modalNuevaMensualidad").modal("toggle");
         alert("Los datos fueron almacenados");
