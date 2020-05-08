@@ -172,9 +172,26 @@ let recargarGridMensualidadInmueble = (arreglo) => {
         element.addEventListener('click', (e) => { 
             e.preventDefault();
             let inmueblEncontrado = ArregloMensualidaInmueble.find((element) => element.id == e.target.getAttribute("idMensualidadInmueble"));
-            console.log(inmueblEncontrado); 
+            //console.log(inmueblEncontrado); 
+            document.querySelector("#rcm_prop_nombre strong").innerHTML = inmueblEncontrado.propietario.nombre;
+            document.querySelector("#rcm_prop_documento strong").innerHTML = inmueblEncontrado.propietario.documento;
+            document.querySelector("#rcm_prop_genero strong").innerHTML = inmueblEncontrado.propietario.genero;
+            document.querySelector("#rcm_prop_fecha_nac strong").innerHTML = inmueblEncontrado.propietario.fecha_nacimiento;
+            document.querySelector("#rcm_prop_edad strong").innerHTML = `${inmueblEncontrado.propietario.calcularEdad()} años`;
+            
+            document.querySelector("#rcm_dim_metros_cuadrados strong").innerHTML = `${inmueblEncontrado.area} m<sup>2</sup>`;
+            document.querySelector("#rcm_dim_tipo strong").innerHTML = inmueblEncontrado.tipo;
+            document.querySelector("#rcm_dim_n_habitantes strong").innerHTML = inmueblEncontrado.numHabitates;
+            document.querySelector("#rcm_dim_fecha_mensualidad strong").innerHTML = inmueblEncontrado.fechaMensualidad;
+            
+            document.querySelector("#rcm_val_administrador strong").innerHTML = inmueblEncontrado.valorAdministracion;
+            document.querySelector("#rcm_val_cuota_aseo strong").innerHTML = inmueblEncontrado.valorCuotaAseo;
+            document.querySelector("#rcm_val_derechos_gym strong").innerHTML = inmueblEncontrado.valorDerechosGym;
+            document.querySelector("#rcm_val_total_pagar strong").innerHTML = inmueblEncontrado.valorTotal;
+            
+            $("#modalVerMensualidad").modal("toggle");
         })
-})
+    });
 }
 
 $(recargarGridMensualidadInmueble(ArregloMensualidaInmueble))
