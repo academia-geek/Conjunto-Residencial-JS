@@ -48,10 +48,44 @@ var buscarPropietarioPorCedula = (elemento, indice) => {
     return document.querySelector("#documento_propietario").value == elemento.documento;
 }
 
+let filtrarElementosMensualidad =  (e) => {
+	let filtro = document.querySelector("#txt_buscador").value.toLocaleLowerCase();
+    let arregloBusqueda = ArregloMensualidaInmueble.filter((item, indice) => {
+        return (item.propietario.nombre.toLocaleLowerCase().indexOf(filtro) >= 0 
+                || item.valorTotal.toString().toLocaleLowerCase().indexOf(filtro) >= 0 
+                || item.fechaMensualidad.toLocaleLowerCase().indexOf(filtro) >= 0);
+                
+    });
+    recargarGridMensualidadInmueble(arregloBusqueda);
+}
+
 
 document.getElementById("btn-agregar-mensualidad").addEventListener("click", (e) => {
 	document.getElementById("frm_nueva_mensualidad").reset();
     $("#modalNuevaMensualidad").modal("toggle");
+});
+
+document.querySelector("#ctn-orden-table").querySelectorAll("input[type = 'radio']").forEach(element => {
+    element.addEventListener('click', (e) =>{
+        let arrg_ord;
+        if(e.target.id == 'edad'){
+            arrg_ord = ArregloMensualidaInmueble.sort((a, b) => {
+                return a.propietario.calcularEdad() - b.propietario.calcularEdad();
+            });
+        }else if(e.target.id == 'total_pagar'){
+            arrg_ord = ArregloMensualidaInmueble.sort((a, b) => {
+                return a.valorTotal - b.valorTotal;
+            });
+        }else if(e.target.id == 'nombre'){
+            arrg_ord = ArregloMensualidaInmueble.sort((a, b) => {
+                return a.propietario.nombre.localeCompare(b.propietario.nombre);
+            });
+        }else{
+            arrg_ord = ArregloMensualidaInmueble;
+        }
+        
+        recargarGridMensualidadInmueble(arrg_ord);
+    })
 });
 
 document.querySelector("#btn_guardar_nueva_mensualidad").addEventListener("click", (e) => {
@@ -113,15 +147,9 @@ document.querySelector("#btn_guardar_nueva_mensualidad").addEventListener("click
     } 
 });
 
-document.querySelector("#btn-buscar-mensualidad").addEventListener("click", (e) => {
-	let filtro = document.querySelector("#txt_buscador").value.toLocaleLowerCase();
-    let arregloBusqueda = ArregloMensualidaInmueble.filter((item, indice) => {
-        return (item.propietario.nombre.toLocaleLowerCase().indexOf(filtro) >= 0 
-                || item.valorTotal.toString().toLocaleLowerCase().indexOf(filtro) >= 0 
-                || item.fechaMensualidad.toLocaleLowerCase().indexOf(filtro) >= 0);
-                
-    });
-    recargarGridMensualidadInmueble(arregloBusqueda);
+document.querySelector("#btn-buscar-mensualidad").addEventListener("click",filtrarElementosMensualidad);
+document.querySelector("#txt_buscador").addEventListener("keyup", (e) => {
+    filtrarElementosMensualidad(e);
 });
 
 let recargarGridMensualidadInmueble = (arreglo) => {
@@ -134,12 +162,19 @@ let recargarGridMensualidadInmueble = (arreglo) => {
                   <td>${item.fechaMensualidad}</td>
                   <td>${item.valorTotal}</td>
                   <td>
-                    <a href="#" indice="${indice}" class = "btn btn-link">Ver</a>
+                    <a href="#" indice="${indice}" idMensualidadInmueble="${item.id}" class = "btn btn-link btn_ver">Ver</a>
                   </td>
                  </tr>`;
     });
     document.querySelector("#tbl-mensualidades tbody").innerHTML = HTML;
     
+    document.querySelectorAll(".btn_ver").forEach(element => {
+        element.addEventListener('click', (e) => { 
+            e.preventDefault();
+            let inmueblEncontrado = ArregloMensualidaInmueble.find((element) => element.id == e.target.getAttribute("idMensualidadInmueble"));
+            console.log(inmueblEncontrado); 
+        })
+})
 }
 
 $(recargarGridMensualidadInmueble(ArregloMensualidaInmueble))

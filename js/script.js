@@ -1,3 +1,6 @@
+function suma(n1, n2) {
+    return n1 + n2;
+} 
 var varible = 7;
 const suma = (n1,  n2) => {
 	let resultado = n1 + n2;

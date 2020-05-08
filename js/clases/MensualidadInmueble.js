@@ -1,5 +1,7 @@
+import utils from './../utils.js';
 export default class MensualidadInmueble{
     constructor(area, tipoInm, numHabitates, fechaMenInm, propietario){
+        this.id = utils.uuid();
         this.area = area;
         this.tipo = tipoInm;
         this.numHabitates = numHabitates;
